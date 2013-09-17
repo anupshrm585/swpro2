@@ -80,7 +80,7 @@ include "header.php";
  array_push($ids, "1");
  array_push($ids, "2");
                     ?>
-                    <input type="hidden" name="ids[]" value="<?php echo $ids;?>">
+                    <input type="hidden" name="ids" value="<?php echo htmlentities(serialize($ids)); ?>">
                     <input type="submit" value="Submit">
                 </div>
                </form>
