@@ -58,7 +58,7 @@ include "header.php";
 		<a href="myprofile.php">Back to Home</a>
                 <form action="../controller/RateSelectedController.php" method="post">
                 <div>
-                    Selected Persons
+                    Selected Persons Hello
                     Rating:
                     <select name="">
                         <option value="1">1</option>
