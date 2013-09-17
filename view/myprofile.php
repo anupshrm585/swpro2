@@ -126,91 +126,25 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
       <h2>Welcome</h2>   
       </div>
       <div>
-	<a href="EditPhoto.php">Change Profile Photo</a>
-      <table width="100%" border="1">
-        <tr align="center">
-          <td align="center"><img src="" width="60" height="115"></td>
+	User Name
+      <table width="100%" height="190" border="1">
+          
+        <tr >
+          <td><a href="EditPhoto.php">Your Image</a></td>
         </tr>
          <tr>
-             <td></td>
+             <td><a href="EditProfile.php">Your Profile</a></td>
         </tr>
+        <tr>
+            <td><a href="viewbio.php">view  biodata</a></td>
+            </tr>
+            <tr>
+            <td><a href="viewvideo.php">view  video</a></td>
+            </tr>
+        
+        
       </table>
-      </div>
-    
-    
-  <div class="heading_bg">
-    <h2>Profile Details</h2></div>
-      <a href="EditProfile.php">Edit Profile</a>
-         <table width="612" border="1">
-         
-  <tr>
-    <td>Email Id</td>
-    <td></td>
-    </tr>
-    <tr>
-   <td></td>
-    <td ><!--<input name="pass" value="<?php //echo $row[pass]; ?>" type="text" placeholder="Password"> --></td>
-     </tr>
-    <tr>
-<td>Profile for:</td>   
-  </tr>
-<tr>
-<td>First Name:</td>
-<td></td>
-</tr>
-<tr>
-<td>Last Name:</td>
-<td></td>
-</tr>
-<tr>
-<td>Gender:</td>
-<td> </td>
-</tr>
-<tr>
-<td>Date of Birth:</td>
-<td></td>
-</tr>
-<tr>
- <td>Religion:</td>   
-  <td></td> 
-</tr>
-<tr>
- <td >Mother Tongue:</td>   
-<td> </td>
-
-</tr>
-
-<tr><td>Living In:</td>
-<td> </td>
-</tr>
-
-
-<tr>
-    <td></td>
-    <td></td>
-</tr>
-
-<tr>
-    <td></td>
-    <td></td>
-    
-</tr>
-
-<tr>
-<td>Membership Type:</td>
-<td></td>
-</tr>
-
-
-
- <tr>
-    <td><a href="viewbio.php">view  biodata</a></td>
-    <td><a href="viewvideo.php">view  video</a></td>
-</tr>
-  
-</table>
-
-   
+      </div>  
     
     </div>
 <div class="one-half last">
@@ -220,22 +154,31 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
     </div>
     <div>
         <a href="RateSelected.php">Rate Them</a>
-    <div class="messages" style="height:125px;overflow-y: scroll">         
+    <div class="messages" style="height:190px;overflow-y: scroll">         
               <div class="adminMessage"></div>
               <div class="userMessage"></div>
            </div>
     
          </div>
    </div>
-        
-          
+        <div class="one-half">     
+          <div class="heading_bg" >
+      <h2 style="color:#32015A">Rated </h2></div>
+      <a href="ViewAllRated.php">View All</a>
+      <div class="messages" style="width:100%;height:200px;overflow-y:scroll; margin-right:10px">
+      <div class="ratedpersons">
+          Selected Name
+          Rating:
+          </div>
+       </div>
+    </div>
       <div class="one-half last">     
     <div class="heading_bg" >
       <h2 style="color:#32015A">Message From Admin </h2>
     </div>
           <div>
                <a href="ViewMessages.php">View Messages</a>
-          <div class="messages" style="height:270px;overflow-y: scroll">         
+          <div class="messages" style="height:200px;overflow-y: scroll">         
               <div class="adminMessage"></div>
               <div class="userMessage"></div>
            </div>
@@ -243,16 +186,7 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
       </div>
     </div>
    
-  <div class="heading_bg" style="clear:both">
-      <h2 style="color:#32015A">Rated </h2></div>
-      <a href="ViewAllRated.php">View All</a>
-      <div style="width:100%;height:150px;overflow-x: scroll;">
-      <div class="ratedpersons">
-          Selected Name
-          Rating:
-          </div>
-       </div>
-    
+  
 
     <div style="clear:both; height: 10px">    
         
