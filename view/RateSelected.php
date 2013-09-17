@@ -60,13 +60,27 @@ include "header.php";
                 <div>
                     Selected Persons Hello
                     Rating:
-                    <select name="">
+                    <select name="1">
+                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         </select>
+                    <select name="2">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        </select>
+                    <?php $ids=array();
+ array_push($ids, "1");
+ array_push($ids, "2");
+                    ?>
+                    <input type="hidden" name="ids[]" value="<?php echo $ids;?>">
                     <input type="submit" value="Submit">
                 </div>
                </form>
