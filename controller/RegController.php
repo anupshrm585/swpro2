@@ -26,6 +26,7 @@
    //check for user already registered not done ?
    
    require '../model/DbConn.php';
+   require '../model/Insert.php';
    require '../model/Select.php';
    
    $select=new Select();
@@ -36,20 +37,22 @@
    }
    else
    {
-    $model=new Model();    
+    $insert=new Insert();    
     
-    if($model->query("call insUserDetails('$email','$fname','$lname','$profilefor','$genn','$dob','$religion','$mothertongue','$livingin','$location','$nriopt','$sques','$ans','$memtype')"))
+    if($insert->insUserDetails($email, $fname, $lname, $profilefor, $genn, $dob, $religion, $mothertongue, $livingin, $location, $nriopt, $sques, $ans, $memtype))
     {
         echo "User Details Inserted Successfully";
+        $insert->insUserStatus($email);
+        
         //inserting in login table
-        if($model->query("call insCredentials('$email','$pass')"))
-            {
+        if($insert->insUserCredentials($email, $pass))
+        {
             session_start();
             $_SESSION['email']=$email;
             $_SESSION['pass']=$pass;
             echo "User Credential Inserted Successfully";
             header("Location: ../view/step_two.php");
-            }
+        }
         else
             echo " Error in Inserting User Credential -> ".  mysql_error();
     }
