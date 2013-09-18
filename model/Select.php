@@ -8,7 +8,10 @@ class Select extends Model
         if($this->rows())
             return 1;
         else
-            return 0;        
+        {
+            echo mysql_error();
+            return 0;
+        }        
     }
     public function checkUser($username)
     {
@@ -16,7 +19,10 @@ class Select extends Model
         if($this->rows())
             return 1;
         else
-            return 0;        
+        {
+            echo mysql_error();
+            return 0;
+        }        
     }
 }
 ?>
