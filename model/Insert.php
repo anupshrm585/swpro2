@@ -42,5 +42,26 @@ class Insert extends Model
             return 0;
         }
     }
+    public function insUserRating($from_user,$to_user,$rating)
+    {
+        if($this->query("insert into matched_profile(from_email,to_email,rating) values('$from_user','$to_user',$rating);"))
+            return 1;
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
+    //for admin 
+    public function insMatchedProfile($from_user,$to_user)
+    {
+        if($this->query("insert into matched_profile(from_email,to_email,rating) values('$from_user','$to_user',0);"))
+            return 1;
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
 }
 ?>
