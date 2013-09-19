@@ -47,9 +47,11 @@ class Select extends Model
         $this->query("select is_paid from user_status where email='$email'");
         if($this->rows())
         {
-            $row= $this->rows();
-            $isPaid=$row['is_paid'];
-            $userStatus=$isPaid;
+            foreach($this->rows() as $row)
+            {
+                $isPaid=$row['is_paid'];
+                $userStatus=$isPaid;            
+            }
             return $userStatus;
         }
         else
@@ -63,9 +65,11 @@ class Select extends Model
         $this->query("select is_approved from user_status where email='$email'");
         if($this->rows())
         {
-            $row= $this->rows();
+            foreach($this->rows() as $row)
+            {
             $isApproved=$row['is_approved'];
             $userStatus=$isApproved;
+            }
             return $userStatus;
         }
         else
@@ -79,9 +83,11 @@ class Select extends Model
         $this->query("select has_pro_bio from user_status where email='$email'");
         if($this->rows())
         {
-            $row= $this->rows();
+            foreach($this->rows() as $row)
+            {
             $hasProBio=$row['has_pro_bio'];
             $userStatus=$hasProBio;
+            }
             return $userStatus;
         }
         else
