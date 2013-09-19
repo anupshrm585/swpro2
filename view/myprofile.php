@@ -1,9 +1,11 @@
-<?php
+<?
+session_start();
     require 'chkSession.php';
-    $email=$_SESSION['email'];
-    require '../model/DbConn.php';
-    require '../model/Select.php';    
+$email=$_SESSION['email'];
+require '../model/DbConn.php';
+    require '../model/Select.php';  
     $select=new Select();
+
 ?>
 <!DOCTYPE HTML>
 
@@ -145,6 +147,7 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
                 
                 <?php
                 
+                    
                     $rows=$select->getUserImage($email);
                     
                     foreach ($rows as $row){
