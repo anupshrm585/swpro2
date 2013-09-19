@@ -47,10 +47,11 @@ class Select extends Model
         $this->query("select is_paid from user_status where email='$email'");
         if($this->rows())
         {
+            var_dump($this->rows());
             foreach($this->rows() as $row)
-            {
+            {                
                 $isPaid=$row['is_paid'];
-                $userStatus=$isPaid;            
+                $userStatus=$isPaid; 
             }
             return $userStatus;
         }
