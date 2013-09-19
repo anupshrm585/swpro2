@@ -1,14 +1,3 @@
-<?php
-include "chkSession.php";
-
-if(@$_GET['msg'])
-{?>
-	<script type="text/javascript" >
-	  alert(<?php echo $_GET['msg'];?>);
-	  </script>
-    
-    
-	<?php } ?>
 <!DOCTYPE HTML>
 
 <head>
