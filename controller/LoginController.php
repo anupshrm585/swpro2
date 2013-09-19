@@ -41,10 +41,11 @@ if($select->checkUserAuthentication($email, $pass))
     }
 }
 else
-    session_start();
-$_SESSION['email']="lovecls1@gmail.com";
-header("Location:../view/myprofile.php");
-    //header("Location: ../index.php?msg=Your email id and password doesnt match");
+    header("Location: ../index.php?msg=Your email id and password doesnt match");
+//    session_start();
+//$_SESSION['email']="lovecls1@gmail.com";
+//header("Location:../view/myprofile.php");
+    //
 
 
 // After login check that the user has paid or not
