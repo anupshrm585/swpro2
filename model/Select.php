@@ -107,7 +107,7 @@ class Select extends Model
             return 0;
         }
     }
-    public function populateUserDetails($email)
+    public function getUserDetails($email)
     {
         $this->query("select * from user_details where email='$email'");
         if($this->rows())
@@ -143,6 +143,39 @@ class Select extends Model
     public function getUserChat($email)
     {
         $this->query("select * from chats where from_user='$email' or to_user='$email'");
+        if($this->rows())
+            return $this->rows();
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
+    public function getUserImage($email)
+    {
+        $this->query("select image from user_bio where email='$email'");
+        if($this->rows())
+            return $this->rows();
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
+    public function getUserVideo($email)
+    {
+        $this->query("select video from user_bio where email='$email'");
+        if($this->rows())
+            return $this->rows();
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
+    public function getUserBioData($email)
+    {
+        $this->query("select biodata from user_bio where email='$email'");
         if($this->rows())
             return $this->rows();
         else

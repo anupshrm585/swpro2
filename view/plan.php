@@ -1,3 +1,23 @@
+<?php
+session_start();
+ $_SESSION['email']=$_POST['email']; 
+ $_SESSION['pass']=$_POST['pass'];
+ $_SESSION['profilefor']=$_POST['profilefor'];
+ $_SESSION['fname']=$_POST['fname'];
+ $_SESSION['lname']=$_POST['lname'];
+ $_SESSION['genn']=$_POST['genn'];
+ $_SESSION['dob']=$_POST['dob'];
+ $_SESSION['religion']=$_POST['religion'];
+ $_SESSION['mothertongue']=$_POST['mothertongue'];
+ $_SESSION['livingin']=$_POST['livingin'];
+ $_SESSION['locationn']=$_POST['locationn'];
+ $_SESSION['sques']=$_POST['sques'];
+ $_SESSION['ans']=$_POST['ans'];
+ if(isset($_POST['nriopt']))
+     $_SESSION['nriopt']=$_POST['nriopt'];
+ 
+?>
+
 <!DOCTYPE HTML>
 
 <head>
@@ -60,12 +80,31 @@
 
 <body>
 <script type="text/javascript">
+function checkPlan(){
+    var radios = document.getElementsByName('memtype');
+    var fl=false;
+for (var i = 0, length = radios.length; i < length; i++) {
+    if (radios[i].checked) {
+        // do whatever you want with the checked radio
+       fl=true;        // only one radio can be logically checked, don't check the rest
+        break;
+    }
+    
+}
+if(fl==false){
+    alert("Please Select a Plan");
+    return false;
+}
+else
+    return true;
+
+}
 
 function mischandler(){
 return false;
 }
 
-function mousehandler(e){
+/*function mousehandler(e){
 var myevent = (isNS) ? e : event;
 var eventbutton = (isNS) ? myevent.which : myevent.button;
 if((eventbutton==2)||(eventbutton==3)) return false;
@@ -113,33 +152,46 @@ include "header.php";
        
     
         <div id="container" style="margin-top: 30px"> 
-    <ul class="ca-menu" style="margin: 40px 0" >
-                  <li style="margin-left:120px" >
-                        <a href="#">
-                            <span class="ca-icon" style="color:#333"></span>
+              <form name="yourform" method="post" action="../controller/RegController.php" onsubmit="return checkPlan();">
+                <ul class="ca-menu" style="margin: 40px 0;margin-bottom: 5px" >
+                     
+                  <li style="margin-left:120px;height:350px" >
+                        <a href="#">                       
+                         <span class="ca-icon" style="color:#333"></span>
                             <H1></H1>
+                            <p align="center"><input name="memtype" value="Basic" type="radio"> Choose</p>
                             <h2 class="ca-main" style="color:#32015A">$999</h2>
                             <h3 class="ca-sub" style="color:#666"><b>BASIC</b></h3>
-                            <h4 class="ca-sub" style="color:#666"><b>Three Selective Choices limited to two months</b></h4>
-                          
+                            <h4 class="ca-sub" style="color:#666"><b>Three Selective Choices limited to two months</b>
+                                   </h4>
+                            
                         </a>
                     </li>
-                    <li>
+                    <li style="height:350px;">
                         <a href="#">
+                            
                             <H1></H1>
+                            <p align="center"><input name="memtype" value="Silver" type="radio"> Choose</p>
                             <h2 class="ca-main" style="color:#32015A">$2999</h2>
                             <h3 class="ca-sub" style="color:#666"><b>SILVER</b></h3>
-                            <h4 class="ca-sub" style="color:#666"><b>Ten Choices within 4 Months</b></h4>
+                            <h4 class="ca-sub" style="color:#666"><b>Ten Choices within 4 Months</b>
+                            
+                            
+                            </h4>
                           
                         </a>
                     </li>
-                    <li style="margin-right:120px">
+                    <li style="margin-right:120px;height:350px">
                         <a href="#">
+                            
                            <H1></H1>
+                           <p align="center"><input name="memtype" value="Gold" type="radio" > Choose</p>
                             <h2 class="ca-main" style="color:#32015A">$4999</h2>
                             <h3 class="ca-sub" style="color:#666"><b>GOLD</b></h3>
-                            <h4 class="ca-sub" style="color:#666"><b>20 qualified Choices within with Marriage Counseling latoron for next one year.</b></h4>
-                         
+                            <h4 class="ca-sub" style="color:#666"><b>20 qualified Choices within with Marriage Counseling latoron for next one year.</b>
+                            
+                            
+                            </h4>                         
                         </a>
                     </li>
                  <!--   <li>
@@ -151,7 +203,9 @@ include "header.php";
                           </div>
                         </a>
                     </li>-->
-          </ul>   
+          </ul>  
+                  <p align="center" style="margin-top: 5px"><input type="submit" value="Submit" class="button success"/></p>
+            </form>
       <div style="clear:both; height: 40px"></div>
     
   
