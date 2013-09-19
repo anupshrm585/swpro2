@@ -16,32 +16,34 @@ if($select->checkUserAuthentication($email, $pass))
     {
         if($select->checkUserIsApproved($email)) //checks isApproved
         {
+            session_start();
+            $_SESSION["email"]=$email;
             if($select->checkUserHasProBio($email))
-            {
-                // send user to dash board
+            {                
+                header("Location: ../view/myprofile.php"); // send user to dash board
             }
             else    // send user to add biodata page
             {
-                
+                header("Location: ../view/step_two.php");
             }
         }
         else    //displays a message " Please wait for admin approval "
         {
-            
+            header("Location: ../index.php?msg=Please wait for admin approval");
         }
     }
-    else //send user to plan page
-    {
-                
-    }
+    //else //send user to plan page
+    //{
+     //    header("Location: ../view/plan.php");
+    //}
 }
 else
-    echo "Incorrect ID PASS";
+    header("Location: ../index.php?msg=Your email id and password doesnt match");
 
 
 // After login check that the user has paid or not
 //If user is not paid send header to index.php 
 //If the user is approved then check that they have entered there bio data and image if yes then redirect them to there home page otherwise to the inserting biodata page
-header("Location: ../view/step_two.php");
+
 
 ?>
