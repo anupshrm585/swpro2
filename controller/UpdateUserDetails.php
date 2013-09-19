@@ -1,6 +1,11 @@
 <?php
         var_dump($_POST);
-        $email="";
+        session_start();
+        if(isset($_SESSION["email"]))           
+        $email=$_SESSION["email"];
+        else 
+        header("Location:../index.php?msg=Please Log In First");
+
         $profilefor=$_POST["profilefor"];
         $firstname=$_POST["fname"];
         $lastname=$_POST["lname"];
@@ -22,10 +27,12 @@
         //didn't picked up $sques, $ans,
         if($update->updateUserDetails($email, $firstname, $lastname, $profilefor, $genn, $dob, $religion, $mothertongue, $livingin, $locationn, $nriopt, $memtype))
         {   // update user details successfully
+            header("Location:../view/myprofile.php?msg=Updated Successfully");
             
         }
         else
         {
             // show an error message
+            header("Location:../view/EditProfile.php?msg=Updated Successfully");
         }
   ?>

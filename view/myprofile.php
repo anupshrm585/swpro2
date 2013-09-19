@@ -1,3 +1,10 @@
+<?php
+    require 'chkSession.php';
+    $email=$_SESSION['email'];
+    require '../model/DbConn.php';
+    require '../model/Select.php';    
+    $select=new Select();
+?>
 <!DOCTYPE HTML>
 
 <head>
@@ -125,25 +132,37 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
     <div class="heading_bg">
       <h2>Welcome</h2>   
       </div>
-      <div>
-	User Name
-      <table width="100%" height="190" border="1">
-          
-        <tr >
-          <td><a href="EditPhoto.php">Your Image</a></td>
-        </tr>
-         <tr>
-             <td><a href="EditProfile.php">Your Profile</a></td>
-        </tr>
-        <tr>
-            <td><a href="viewbio.php">view  biodata</a></td>
-            </tr>
-            <tr>
-            <td><a href="viewvideo.php">view  video</a></td>
-            </tr>
-        
-        
-      </table>
+      <div style="margin-bottom: 0px;padding-left: 6px;">
+          <ul id="tabify_menu" class="menu_tab" style="margin: 0px ">
+	<li><a href="EditPhoto.php">Edit Image</a></li>
+        <li><a href="EditProfile.php">View Profile</a></li>
+        <li><a href="viewbio.php">View  Bio Data</a></li>
+        <li><a href="viewvideo.php">View  Video</a></li>
+        </ul>
+          <div style="clear:both"></div>
+          </div>
+      <div class="messages" style="margin-top:0px;height:210px; ">
+                <div style="width:220px;float:left;padding: 12px"><img src="" width="210" height="180" style="margin: 0px;padding-bottom:  0px;border:1px solid #ccc"></div>
+                <?php
+                    
+                    
+                ?>
+            <div style="width:200px;float:left;padding:20px 10px;"><?php
+                
+                $rows=$select->populateUserDetails($email);
+                foreach ($rows as $row)
+                {
+                    echo "<h3 style='margin:2px'>".$row["fname"]." ".$row["lname"]."</h3></br>";
+                    echo $row["dob"]."<br>";
+                    echo $row["country_living_in"]."<br>";
+                    echo $row["email"];
+                }
+                
+                ?>
+
+</div>
+                <div style="clear: both;"></div> 
+           
       </div>  
     
     </div>
@@ -153,18 +172,28 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
       <h2 style="color:#32015A">Choose and Rate</h2>     
     </div>
     <div>
-        <a href="RateSelected.php">Rate Them</a>
-    <div class="messages" style="height:190px;overflow-y: scroll">         
+        <div style="margin-bottom: 0px;padding-left: 6px;">
+          <ul id="tabify_menu" class="menu_tab" style="margin: 0px ">
+	<li><a href="RateSelected.php">Rate Them</a></li>
+        </ul>
+            </div>
+        
+    <div class="messages" style="height:210px;overflow-y: scroll;margin-top:0px " >         
               <div class="adminMessage"></div>
               <div class="userMessage"></div>
            </div>
-    
+    <div style="clear:both"></div>
          </div>
    </div>
         <div class="one-half">     
           <div class="heading_bg" >
       <h2 style="color:#32015A">Rated </h2></div>
-      <a href="ViewAllRated.php">View All</a>
+      <div style="margin-bottom: 0px;padding-left: 6px;">
+          <ul id="tabify_menu" class="menu_tab" style="margin: 0px ">
+	<li><a href="ViewAllRated.php">View All</a></li>
+        </ul>
+            </div>
+      
       <div class="messages" style="width:100%;height:200px;overflow-y:scroll; margin-right:10px">
       <div class="ratedpersons">
           Selected Name
@@ -176,14 +205,19 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
     <div class="heading_bg" >
       <h2 style="color:#32015A">Message From Admin </h2>
     </div>
-          <div>
-               <a href="ViewMessages.php">View Messages</a>
+          <div style="margin-bottom: 0px;padding-left: 6px;">
+          <ul id="tabify_menu" class="menu_tab" style="margin: 0px ">
+	<li><a href="ViewMessages.php">View Messages</a></li>
+        </ul>
+            </div>
+          
+               
           <div class="messages" style="height:200px;overflow-y: scroll">         
               <div class="adminMessage"></div>
               <div class="userMessage"></div>
            </div>
          
-      </div>
+    
     </div>
    
   
