@@ -47,9 +47,11 @@ class Select extends Model
         $this->query("select is_paid from user_status where email='$email'");
         if($this->rows())
         {
-            $row= $this->rows();
-            $isPaid=$row['is_paid'];
-            $userStatus=$isPaid;
+            foreach($this->rows() as $row)
+            {
+                $isPaid=$row['is_paid'];
+                $userStatus=$isPaid;            
+            }
             return $userStatus;
         }
         else
@@ -63,9 +65,11 @@ class Select extends Model
         $this->query("select is_approved from user_status where email='$email'");
         if($this->rows())
         {
-            $row= $this->rows();
+            foreach($this->rows() as $row)
+            {
             $isApproved=$row['is_approved'];
             $userStatus=$isApproved;
+            }
             return $userStatus;
         }
         else
@@ -79,9 +83,11 @@ class Select extends Model
         $this->query("select has_pro_bio from user_status where email='$email'");
         if($this->rows())
         {
-            $row= $this->rows();
+            foreach($this->rows() as $row)
+            {
             $hasProBio=$row['has_pro_bio'];
             $userStatus=$hasProBio;
+            }
             return $userStatus;
         }
         else
@@ -134,7 +140,17 @@ class Select extends Model
             return 0;
         }
     }
-    
+    public function getUserChat($email)
+    {
+        $this->query("select * from chats where from_user='$email' or to_user='$email'");
+        if($this->rows())
+            return $this->rows();
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
     
 }
 ?>

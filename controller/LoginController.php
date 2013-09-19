@@ -34,10 +34,11 @@ if($select->checkUserAuthentication($email, $pass))
             header("Location: ../index.php?msg=Please wait for admin approval");
         }
     }
-    //else //send user to plan page
-    //{
-     //    header("Location: ../view/plan.php");
-    //}
+    else //send user to plan page
+    {
+         //header("Location: ../view/index.php");
+        echo ' User have not yet paid for any plan ';
+    }
 }
 else
     session_start();
