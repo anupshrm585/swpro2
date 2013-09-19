@@ -134,7 +134,17 @@ class Select extends Model
             return 0;
         }
     }
-    
+    public function getUserChat($email)
+    {
+        $this->query("select * from chats where from_user='$email' or to_user='$email'");
+        if($this->rows())
+            return $this->rows();
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
     
 }
 ?>
