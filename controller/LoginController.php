@@ -10,8 +10,31 @@ require '../model/Select.php';
 
 $select = new Select();
 
-if($select->checkLogin($email, $pass))
-    echo "Correct ID PASS"; // in this place redirect the user to his dashboard
+if($select->checkUserAuthentication($email, $pass))
+{
+    if($select->checkUserIsPaid($email)) //checks isPaid
+    {
+        if($select->checkUserIsApproved($email)) //checks isApproved
+        {
+            if($select->checkUserHasProBio($email))
+            {
+                // send user to dash board
+            }
+            else    // send user to add biodata page
+            {
+                
+            }
+        }
+        else    //displays a message " Please wait for admin approval "
+        {
+            
+        }
+    }
+    else //send user to plan page
+    {
+                
+    }
+}
 else
     echo "Incorrect ID PASS";
 

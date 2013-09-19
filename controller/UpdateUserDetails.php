@@ -15,4 +15,17 @@
             $nriopt=$_POST["nriopt"];
         $memtype=$_POST["memtype"];
         
+        
+        require '../model/Update.php';
+        $update=new Update();
+        
+        //didn't picked up $sques, $ans,
+        if($update->updateUserDetails($email, $firstname, $lastname, $profilefor, $genn, $dob, $religion, $mothertongue, $livingin, $locationn, $nriopt, $memtype))
+        {   // update user details successfully
+            
+        }
+        else
+        {
+            // show an error message
+        }
   ?>

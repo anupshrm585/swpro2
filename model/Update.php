@@ -71,6 +71,16 @@ class Update extends Model
             echo mysql_error();
             return 0;
         }        
-    }    
+    }
+    public function updateUserDetails($email,$fname,$lname,$profile_for,$gender,$dob,$religion,$mother_tongue,$country_living_in,$location,$nriopt,$sques,$ans,$memtype)
+    {
+        if($this->query(""))
+            return 1;
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }
+    }
 }
 ?>

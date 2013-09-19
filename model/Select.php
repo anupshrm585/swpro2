@@ -2,7 +2,7 @@
 
 class Select extends Model
 {    
-    public function checkLogin($email,$pass)
+    public function checkUserAuthentication($email,$pass)
     {
         $this->query("select * from user_credentials where email='$email' and pass='$pass'");
         if($this->rows())
@@ -34,6 +34,54 @@ class Select extends Model
             $isApproved=$row['is_approved'];
             $hasProBio=$row['has_pro_bio'];
             $userStatus=$isPaid*$isApproved*$hasProBio;
+            return $userStatus;
+        }
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }   
+    }
+    public function checkUserIsPaid($email)
+    {
+        $this->query("select is_paid from user_status where email='$email'");
+        if($this->rows())
+        {
+            $row= $this->rows();
+            $isPaid=$row['is_paid'];
+            $userStatus=$isPaid;
+            return $userStatus;
+        }
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }   
+    }
+        public function checkUserIsApproved($email)
+    {
+        $this->query("select is_approved from user_status where email='$email'");
+        if($this->rows())
+        {
+            $row= $this->rows();
+            $isApproved=$row['is_approved'];
+            $userStatus=$isApproved;
+            return $userStatus;
+        }
+        else
+        {
+            echo mysql_error();
+            return 0;
+        }   
+    }
+    public function checkUserHasProBio($email)
+    {
+        $this->query("select has_pro_bio from user_status where email='$email'");
+        if($this->rows())
+        {
+            $row= $this->rows();
+            $hasProBio=$row['has_pro_bio'];
+            $userStatus=$hasProBio;
             return $userStatus;
         }
         else
