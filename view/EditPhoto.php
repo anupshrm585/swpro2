@@ -1,3 +1,11 @@
+<?php
+    require 'chkSession.php';
+    $email=$_SESSION['email'];
+    require '../model/DbConn.php';
+    require '../model/Select.php';    
+    $select=new Select();
+?>
+
 <!DOCTYPE HTML>
 
 <head>
@@ -127,12 +135,21 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
 	  </div>
 	  
 	<a href="myprofile.php">Back to Home</a>
-	  <form name="f2" method="post" action="../controller/UploadFileController.php" enctype="multipart/form-data" >
+	  <form name="f2" method="post" action="../controller/UpdateBioController.php" enctype="multipart/form-data" >
       <table width="100%" border="1">
         <tr align="center">
-          <td align="center" style="padding:20px">
-		  <img src="" height="240" width="200" />
-		  
+          <td align="center" style="padding:20px;align:center">
+              <?php
+                $rows=$select->getUserImage($email);
+                foreach($rows as $row)
+                    {
+                        if(isset($row["image"])){
+              ?>
+              <img style="border: 1px solid #ccc;" src="../controller/usersdata/<?php echo $row["image"];?>" height="180" width="210" />
+		<?php
+                    }
+                    }
+                ?>  
 		  </td>
         <tr>
          <tr>

@@ -1,3 +1,9 @@
+<?php
+    require 'chkSession.php';
+
+
+?>
+
 <!DOCTYPE HTML>
 
 <head>

@@ -189,7 +189,7 @@ table td {
 	background-image: -o-linear-gradient(top, #fafafa, #E0E0E0);
 
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#E0E0E0');
-	
+	padding: 1px 10px;
 	color: #000;
 }
 

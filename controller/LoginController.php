@@ -18,10 +18,10 @@ if($select->checkUserAuthentication($email, $pass))
     {
         if($select->checkUserIsApproved($email)) //checks isApproved
         {
-            session_start();
-            $_SESSION["email"]=$email;
             if($select->checkUserHasProBio($email))
-            {                
+            {          
+                session_start();
+                $_SESSION['email']=$email;
                 header("Location: ../view/myprofile.php"); // send user to dash board
             }
             else    // send user to add biodata page

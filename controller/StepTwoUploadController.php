@@ -1,24 +1,42 @@
 <?php
 
-//session_start();
-var_dump($_FILES);
+session_start();
+require '../view/chkSession.php';
+$username=$_SESSION['email'];
+//var_dump($_FILES);
 if(empty($_FILES["photo"]["name"]) == false){
-    upload("photo");
+    $image=upload("photo",$username);
     
 }
 if(empty($_FILES["video"]["name"]) == false){
-    upload("video");
+    $video=upload("video",$username);
 }
 if(empty($_FILES["biodata"]["name"]) == false){
-    upload("biodata");
+    $biodata=upload("biodata",$username);
     
 }
+                require '../model/DbConn.php';
+                require '../model/Insert.php';
+                require '../model/Update.php';
+                
+                $insert=new Insert();
+                $update=new Update();
+                
+                if($insert->insUserBio($username, $image, $video, $biodata))
+                {   // bio inserted successfully
+                    $hasProBio=1; // user has uploaded his bio, 1 :: true
+                    $update->updateUserBioStatus($username, $hasProBio);
+                    header("Location: ../view/myprofile.php");
+                }
+                else    
+                {   // some error
+                    
+                }
 
-
-function upload($field){
-    $username = "lovecls1@gmail.com";//$_SESSION['email'];
-$allowedExts = array("gif", "jpeg", "jpg", "png", "mp4","pdf","doc","docx","mpeg","mpg");
-$allowedMimeTypes = array('application/msword','application/pdf','text/pdf','text/msword','image/gif','image/jpeg','image/png','video/mpg');
+function upload($field,$username){
+    
+$allowedExts = array("gif", "jpeg", "jpg", "png", "mp4","pdf","doc","docx","mp4");
+$allowedMimeTypes = array('application/msword','application/pdf','text/pdf','text/msword','image/gif','image/jpeg','image/png','video/mp4');
     
 if (empty($_FILES[$field]["name"]) == false) {
     $extension = end(explode(".", $_FILES[$field]["name"]));  
@@ -49,37 +67,16 @@ if (empty($_FILES[$field]["name"]) == false) {
                 //echo $filepath;
                 
                 move_uploaded_file($_FILES[$field]["tmp_name"], $filepath.$filename);
-                echo $field.'uploaded';
-                // calling model to update status and insert biodata
-              /*  require '../model/DbConn.php';
-                require '../model/Insert.php';
-                require '../model/Update.php';
-                
-                $insert=new Insert();
-                $update=new Update();
-                
-                if($insert->insUserBio($username, $image, $video, $biodata))
-                {   // bio inserted successfully
-                    $hasProBio=1; // user has uploaded his bio, 1 :: true
-                    $update->updateUserBioStatus($username, $hasProBio);
-                    header("Location: ../view/myprofile.php");
-                }
-                else    
-                {   // some error
-                    
-                }
+                return $filename;
+              
+            
             }
         }
     } else {
-        echo "Invalid file";
+        header("Location: ../view/step_two.php?msg=There was an error in uploading");
     }
 } else {
-    echo 'err';
-}
-               */
-    }
-        }
-            }
+    header("Location: ../view/step_two.php?msg=There was an error in uploading");
 }
 }
 

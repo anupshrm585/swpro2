@@ -1,9 +1,11 @@
-<?php
+<?
+session_start();
     require 'chkSession.php';
-    $email=$_SESSION['email'];
-    require '../model/DbConn.php';
-    require '../model/Select.php';    
+$email=$_SESSION['email'];
+require '../model/DbConn.php';
+    require '../model/Select.php';  
     $select=new Select();
+
 ?>
 <!DOCTYPE HTML>
 
@@ -142,15 +144,25 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
           <div style="clear:both"></div>
           </div>
       <div class="messages" style="margin-top:0px;height:210px; ">
-                <div style="width:220px;float:left;padding: 12px"><img src="" width="210" height="180" style="margin: 0px;padding-bottom:  0px;border:1px solid #ccc"></div>
+                
                 <?php
+                
                     
+                    $rows=$select->getUserImage($email);
                     
+                    foreach ($rows as $row){
+                        if(isset($row["image"])){
+                        ?>
+                
+                <div style="width:220px;float:left;padding: 12px"><img src="../controller/usersdata/<?php echo $row["image"];?>" width="210" height="180" style="margin: 0px;padding-bottom:  0px;border:1px solid #ccc"></div>
+                                    
+                <?php
+                    }
+                    }
                 ?>
             <div style="width:200px;float:left;padding:20px 10px;"><?php
                 
-                $rows=$select->populateUserDetails($email);
-                
+                $rows=$select->getUserDetails($email);
                 foreach ($rows as $row)
                 {
                     echo "<h3 style='margin:2px'>".$row["fname"]." ".$row["lname"]."</h3></br>";
