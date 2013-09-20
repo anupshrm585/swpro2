@@ -1,6 +1,10 @@
 <?php 
 
     require 'chkSession.php';
+    $email=$_SESSION['email'];
+    require '../model/DbConn.php';
+    require '../model/Select.php';  
+    $select=new Select();
 ?>
 
 <!DOCTYPE HTML>
@@ -131,13 +135,21 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
     <h2>Edit Profile Details</h2></div>
   <a href="myprofile.php">Back to Home</a>
 
-
+  <?php
+  $rows=$select->getUserDetails($email); 
+  foreach($rows as $row)
+  {
+      
+  
+  
+  
+  ?>
          <table width="612" border="1">
          <form name="f1" method="post" action="../controller/UpdateUserDetails.php" onSubmit="return valid(this);">
   
     <tr>
 <td>Profile for:</td>   
-<td><select name="profilefor"  value=""><option></option>
+<td><select name="profilefor"  ><option value="<?php echo $row['profile_for'];?>"><?php echo $row['profile_for'];?></option>
 <option value="Self" label="Self">Self</option>
 <option value="son" label="Son">Son</option>
 <option value="Daughter" label="Daughter">Daughter</option>
@@ -147,18 +159,18 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
 <option value="Relative" label="Relative">Relative</option>
 </select> </td>  </tr>
 <tr>
-<td><input type="text" value="" name="fname" placeholder="First Name"/></td><td><input type="text" value="" name="lname" placeholder="Last Name"/></td>
+<td><input type="text" value="<?php echo $row['fname'];?>" name="fname" placeholder="First Name"/></td><td><input type="text" value="<?php echo $row['lname'];?>" name="lname" placeholder="Last Name"/></td>
 </tr>
 <tr>
 <td>Gender:</td>
-<td><input name="genn" type="radio" value="male"  >Male <input name="genn" type="radio" value="female" >Female </td>
+<td><input name="genn" type="radio" value="male"  <?php if($row["gender"] == "male") echo "checked='checked'";?>>Male <input name="genn" type="radio" value="female"  <?php if($row["gender"] == "female") echo "checked='checked'";?>>Female </td>
 </tr>
 <tr>
 <td>Date of Birth:</td>
-<td><input type="text" value="" name="dob" placeholder="DD/MM/YYYY"/></td>
+<td><input type="text" value="<?php echo $row['dob'];?>" name="dob" placeholder="DD/MM/YYYY"/></td>
 </tr>
  <td>Religion:</td>   
-<td> <select name="religion" value=""><option></option>
+<td> <select name="religion" ><option value="<?php echo $row['religion'];?>"><?php echo $row['religion'];?></option>
     <option value="Hindu" label="Hindu">Hindu</option>
     <option value="Muslim" label="Muslim">Muslim</option>
     <option value="Christian" label="Christian">Christian</option>
@@ -174,29 +186,30 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
      </tr>
      <tr>
      <td >Mother Tongue:</td>   
-<td> <select name="mothertongue" value=""><option></option>
+<td> <select name="mothertongue" ><option value="<?php echo $row['mother_tongue'];?>"><?php echo $row['mother_tongue'];?></option>
 <option value="Assamese" >Assamese</option><option value="Bengali" >Bengali</option><option value="English" >English</option><option value="Gujarati" >Gujarati</option><option value="Hindi" >Hindi</option><option value="Kannada" >Kannada</option><option value="Konkani" >Konkani</option><option value="Malayalam" >Malayalam</option><option value="Marathi" >Marathi</option><option value="Marwari" >Marwari</option><option value="Oriya" >Oriya</option><option value="Punjabi" >Punjabi</option><option value="Sindhi" >Sindhi</option><option value="Tamil" >Tamil</option><option value="Telugu" >Telugu</option><option value="Urdu" >Urdu</option><optgroup id='mother_tongue-optgroup-All Mother Tongues' label='All Mother Tongues'>All Mother Tongues</optgroup><option value="Aka" >Aka</option><option value="Arabic" >Arabic</option><option value="Assamese" >Assamese</option><option value="Awadhi" >Awadhi</option><option value="Bengali" >Bengali</option><option value="Bhojpuri" >Bhojpuri</option><option value="Chattisgarhi" >Chattisgarhi</option><option value="Coorgi" >Coorgi</option><option value="Dogri" >Dogri</option><option value="English" >English</option><option value="French" >French</option><option value="Garhwali" >Garhwali</option><option value="Gujarati" >Gujarati</option><option value="Haryanavi" >Haryanavi</option><option value="Himachali/Pahari" >Himachali/Pahari</option><option value="Hindi" >Hindi</option><option value="Hindko" >Hindko</option><option value="Kannada" >Kannada</option><option value="Kashmiri" >Kashmiri</option><option value="Konkani" >Konkani</option><option value="Kumaoni" >Kumaoni</option><option value="Kutchi" >Kutchi</option><option value="Magahi" >Magahi</option><option value="Maithili" >Maithili</option><option value="Malay" >Malay</option><option value="Malayalam" >Malayalam</option><option value="Manipuri" >Manipuri</option><option value="Marathi" >Marathi</option><option value="Marwari" >Marwari</option><option value="Nepali" >Nepali</option><option value="Oriya" >Oriya</option><option value="Pashto" >Pashto</option><option value="Persian" >Persian</option><option value="Punjabi" >Punjabi</option><option value="Rajasthani" >Rajasthani</option><option value="Russian" >Russian</option><option value="Sindhi" >Sindhi</option><option value="Sinhala" >Sinhala</option><option value="Spanish" >Spanish</option><option value="Tamil" >Tamil</option><option value="Telugu" >Telugu</option><option value="Tulu" >Tulu</option><option value="Urdu" >Urdu</option></select></td>
      </tr>
 
 <tr>
     <td>Living In:</td>
-<td> <select name="livingin" value=""><option></option>
+<td> <select name="livingin"><option value="<?php echo $row['country_living_in'];?>"><?php echo $row['country_living_in'];?></option>
 <option value="USA" >USA</option><option value="United Kingdom" >UK</option><option value="United Arab Emirates" >UAE</option><option value="Canada" >Canada</option><option value="Australia" >Australia</option><option value="New Zealand" >New Zealand</option><option value="Pakistan" >Pakistan</option><option value="Saudi Arabia" >Saudi Arabia</option><option value="Kuwait" >Kuwait</option><option value="South Africa" >South Africa</option><optgroup id='countryofresidence-optgroup-All Countries' label='All Countries'>All Countries</optgroup><option value="Afghanistan" >Afghanistan</option><option value="Australia" >Australia</option><option value="Austria" >Austria</option><option value="Bahrain" >Bahrain</option><option value="Bangladesh" >Bangladesh</option><option value="Belgium" >Belgium</option><option value="Botswana" >Botswana</option><option value="Brunei" >Brunei</option><option value="Canada" >Canada</option><option value="Chile" >Chile</option><option value="China" >China</option><option value="Cyprus" >Cyprus</option><option value="Denmark" >Denmark</option><option value="Dominican Republic" >Dominican Republic</option><option value="Fiji Islands" >Fiji Islands</option><option value="Finland" >Finland</option><option value="France" >France</option><option value="Germany" >Germany</option><option value="Greece" >Greece</option><option value="Guyana" >Guyana</option><option value="Hong Kong SAR" >Hong Kong SAR</option><option value="Hungary" >Hungary</option><option value="India" >India</option><option value="Indonesia" >Indonesia</option><option value="Iran" >Iran</option><option value="Ireland" >Ireland</option><option value="Israel" >Israel</option><option value="Italy" >Italy</option><option value="Jamaica" >Jamaica</option><option value="Japan" >Japan</option><option value="Kenya" >Kenya</option><option value="Kuwait" >Kuwait</option><option value="Malaysia" >Malaysia</option><option value="Maldives" >Maldives</option><option value="Mauritius" >Mauritius</option><option value="Mexico" >Mexico</option><option value="Nepal" >Nepal</option><option value="Netherlands" >Netherlands</option><option value="Netherlands Antilles" >Netherlands Antilles</option><option value="New Zealand" >New Zealand</option><option value="Norway" >Norway</option><option value="Oman" >Oman</option><option value="Pakistan" >Pakistan</option><option value="Philippines" >Philippines</option><option value="Poland" >Poland</option><option value="Qatar" >Qatar</option><option value="Russia" >Russia</option><option value="Saudi Arabia" >Saudi Arabia</option><option value="Singapore" >Singapore</option><option value="South Africa" >South Africa</option><option value="Spain" >Spain</option><option value="Sri Lanka" >Sri Lanka</option><option value="Sweden" >Sweden</option><option value="Switzerland" >Switzerland</option><option value="Tanzania" >Tanzania</option><option value="Thailand" >Thailand</option><option value="Trinidad and Tobago" >Trinidad and Tobago</option><option value="USA" >USA</option><option value="United Arab Emirates" >UAE</option><option value="United Kingdom" >UK</option></select>
 </td>
 </tr>
 <tr>
+       <td></td>
     <td>
-<input name="locationn" type="radio" value="nri">NRI <input name="locationn" type="radio" value="indian">INDIAN
+<input name="locationn" type="radio" value="nri" <?php if($row["location"] == "nri") echo "checked='checked'";?>>NRI <input name="locationn" type="radio" value="indian" <?php if($row["location"] == "indian") echo "checked='checked'";?>>INDIAN
     </td>
 </tr>
 <tr>
     <td></td>
 <td>
-Green Card Holder<input name="nriopt" type="radio" value="green">
+Green Card Holder<input name="nriopt" type="radio" value="green" <?php if($row["nriopt"] == "green") echo "checked='checked'";?>>
 
-Job Permit<input name="nriopt" type="radio" value="job_permit" >
+Job Permit<input name="nriopt" type="radio" value="job_permit" <?php if($row["nriopt"] == "job_permit") echo "checked='checked'";?>>
 
-Own Business<input name="nriopt" type="radio" value="own_business" >
+Own Business<input name="nriopt" type="radio" value="own_business" <?php if($row["nriopt"] == "own_business") echo "checked='checked'";?>>
 </td>
 </tr>
 
@@ -206,7 +219,7 @@ Own Business<input name="nriopt" type="radio" value="own_business" >
 
 
 <select name="memtype">
-<option value=""></option>
+    <option value="<?php echo  $row['memtype'];?>"><?php echo  $row['memtype'];?></option>
 <option value="gold">Gold</option>
 <option value="silver">Silver</option>
 <option value="platimun">Platinum</option>
@@ -225,8 +238,7 @@ Own Business<input name="nriopt" type="radio" value="own_business" >
 
 <tr><td></td>
  <td>
- 
-
+ <?php } ?>
 
 <input type="submit" value="update" class="button success" /></td></tr>
 

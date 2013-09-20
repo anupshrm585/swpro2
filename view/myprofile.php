@@ -1,8 +1,7 @@
-<?
-session_start();
-    require 'chkSession.php';
+<?php
+include 'chkSession.php';
 $email=$_SESSION['email'];
-require '../model/DbConn.php';
+    require '../model/DbConn.php';
     require '../model/Select.php';  
     $select=new Select();
 

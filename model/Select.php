@@ -45,10 +45,11 @@ class Select extends Model
     public function checkUserIsPaid($email)
     {
         $this->query("select is_paid from user_status where email='$email'");
-        if($this->rows())
+        $rows=$this->rows();
+        if($rows != null)
         {
-            var_dump($this->rows());
-            foreach($this->rows() as $row)
+            var_dump($rows);
+            foreach($rows as $row)
             {                
                 $isPaid=$row['is_paid'];
                 $userStatus=$isPaid; 
@@ -111,8 +112,9 @@ class Select extends Model
     public function getUserDetails($email)
     {
         $this->query("select * from user_details where email='$email'");
-        if($this->rows())
-            return $this->rows();
+        $rows=$this->rows();
+        if($rows !=null)
+            return $rows;
         else
         {
             echo mysql_error();
@@ -155,8 +157,9 @@ class Select extends Model
     public function getUserImage($email)
     {
         $this->query("select image from user_bio where email='$email'");
-        if($this->rows())
-            return $this->rows();
+        $rows=$this->rows();
+        if($rows != null)
+            return $rows;
         else
         {
             echo mysql_error();

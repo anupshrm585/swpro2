@@ -14,7 +14,7 @@ class Model
 
 	public function query($sql)
 	{
-            //$this->rows=null;
+                $this->rows=null;
 		$this->result = $this->db->query($sql);
                 return $this->result;
 	}
