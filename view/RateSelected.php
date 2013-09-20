@@ -66,30 +66,59 @@ include "header.php";
 	  
 		<a href="myprofile.php">Back to Home</a>
                 <form action="../controller/RateSelectedController.php" method="post">
-                <div>
+               
                      <?php
+                     $ids=array();
                      $rows=$select->getUnratedMatchedProfile($email);
                     foreach($rows as $row)
                     {
+                        ?>
+                     <div style="border:1px solid #ccc; padding:15px; margin-bottom:3px">
                         
-                    
-                    ?>
-                    Rating:
-                    <select name="<?php echo $row["to_user"];?>">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        </select>
-                        echo '<div style="border:1px solid #ccc; text-align:center; padding:5px">'"</div>";
+                            <?php 
+                                $image=$select->getUserImage($row["to_user"]);
+                                     
+                                if(is_array($image))
+                                {
+                                foreach ($image as $img)                                    
+                                {
+                                    ?>
+                                    <div style="float:left; margin-right: 15px; width:210;">
+                                        
+                                  <?php                                     
+                                    echo '<img src="../controller/usersdata/'.$img["image"].'" width=210 height=180>';                                    
+                                         
+                                    ?>
+                             
+                                    </div>
+                             <?php   }
+                                }
+                                else
+                                {
+                            ?>
+                                    <div style="float:left; margin-right: 15px; width:210;">
+                                        
+                                  <?php
+                                  echo '<img src="" width=210 height=180>';
+                                    ?>
+                             
+                                    </div>
+                        <?php
+                                }?>
+                         <div style="float:left;width: 60%">
                     <?php
                     
-                    }
+                            $userdet=$select->getUserDetails($row["to_user"]);
+                            foreach ($userdet as $usr)
+                            {
+                                echo '<h3 style="margin-bottom:1px">'.$usr["fname"].' '.$usr["lname"].'</h3><br>';
+                                echo $usr["dob"].'<br>';
+                                echo $usr["religion"].'<br>';
+                                echo $usr["country_living_in"].'<br>';
+                            }
                     ?>
-                    
-                    <select name="2">
+                    Rating:
+                    <select name="<?php echo $row['id'];?>">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -97,13 +126,19 @@ include "header.php";
                         <option value="4">4</option>
                         <option value="5">5</option>
                         </select>
-                    <?php $ids=array();
- array_push($ids, "1");
- array_push($ids, "2");
+                    </div>                   
+                    <?php
+                    
+                    array_push($ids, $row['id']);
+                    ?>
+                     <div style="clear: both"></div>
+                </div>
+                    <?php
+                    }
                     ?>
                     <input type="hidden" name="ids" value="<?php echo htmlentities(serialize($ids)); ?>">
-                    <input type="submit" value="Submit">
-                </div>
+                   
+                    <p align="center"><input class="button success" type="submit" value="Submit"></p>
                </form>
         
     </div>

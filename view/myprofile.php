@@ -191,11 +191,21 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
             </div>
         
     <div class="messages" style="height:210px;overflow-y: scroll;margin-top:0px;padding:5px " >         
+        
               <?php
                     $rows=$select->getUnratedMatchedProfile($email);
+                    
                     foreach($rows as $row)
                     {
-                        echo '<div style="border:1px solid #ccc; text-align:center; padding:5px">'.$row["to_user"]."</div>";
+                        echo '<div style="border:1px solid #ccc; text-align:center; padding:5px">';
+                        $userdet=$select->getUserDetails($row["to_user"]);
+                            foreach ($userdet as $usr)
+                            {
+                                echo '<h4 style="margin:0px">'.$usr["fname"].' '.$usr["lname"].'</h4>';
+                                echo $usr["religion"].',';
+                                echo '<b>'.$usr["country_living_in"].'</b>';
+                            }
+                        echo '</div>';
                     }
               
               ?>
