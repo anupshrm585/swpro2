@@ -1,3 +1,12 @@
+<?php
+    include 'chkSession.php';
+    $email=$_SESSION['email'];
+    require '../model/DbConn.php';
+    require '../model/Select.php';  
+    $select=new Select();
+
+?>
+
 <!DOCTYPE HTML>
 
 <head>
@@ -58,9 +67,15 @@ include "header.php";
 		<a href="myprofile.php">Back to Home</a>
                 <form action="../controller/RateSelectedController.php" method="post">
                 <div>
-                    Selected Persons Hello
+                     <?php
+                     $rows=$select->getUnratedMatchedProfile($email);
+                    foreach($rows as $row)
+                    {
+                        
+                    
+                    ?>
                     Rating:
-                    <select name="1">
+                    <select name="<?php echo $row["to_user"];?>">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -68,6 +83,12 @@ include "header.php";
                         <option value="4">4</option>
                         <option value="5">5</option>
                         </select>
+                        echo '<div style="border:1px solid #ccc; text-align:center; padding:5px">'"</div>";
+                    <?php
+                    
+                    }
+                    ?>
+                    
                     <select name="2">
                         <option value="0">0</option>
                         <option value="1">1</option>
