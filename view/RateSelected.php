@@ -69,7 +69,10 @@ include "header.php";
                
                      <?php
                      $ids=array();
+                     
                      $rows=$select->getUnratedMatchedProfile($email);
+                     if(is_array($rows))
+                     {
                     foreach($rows as $row)
                     {
                         ?>
@@ -135,12 +138,17 @@ include "header.php";
                 </div>
                     <?php
                     }
+                   
                     ?>
                     <input type="hidden" name="ids" value="<?php echo htmlentities(serialize($ids)); ?>">
                    
                     <p align="center"><input class="button success" type="submit" value="Submit"></p>
                </form>
-        
+        <?php
+        }
+        else
+            echo '<h3>Waiting For Your Match</h3>';
+        ?>
     </div>
 
     <div style="clear:both; height: 40px"></div>

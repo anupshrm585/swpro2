@@ -62,9 +62,9 @@ class Update extends Model
             return 0;
         }        
     }
-    public function updateUserRating($from_user,$to_user,$rating)
+    public function updateUserRating($id,$rating)
     {
-        if($this->query("update matched_profile set to_user='$to_user',rating='$rating' where from_user='$from_user';"))
+        if($this->query("update matched_profile set rating='$rating' where id='$id';"))
             return 1;
         else
         {

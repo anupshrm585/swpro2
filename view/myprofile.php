@@ -194,7 +194,8 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
         
               <?php
                     $rows=$select->getUnratedMatchedProfile($email);
-                    
+                    if(is_array($rows))
+                    {
                     foreach($rows as $row)
                     {
                         echo '<div style="border:1px solid #ccc; text-align:center; padding:5px">';
@@ -207,7 +208,13 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
                             }
                         echo '</div>';
                     }
-              
+                  }
+                  else
+                  {
+                      echo '<div style=" text-align:center; padding:5px">';
+                      echo '<h3>Waiting For Your Match</h3>';
+                      echo '</div>';
+                  }
               ?>
            </div>
     <div style="clear:both"></div>
@@ -223,9 +230,32 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
             </div>
       
       <div class="messages" style="width:100%;height:200px;overflow-y:scroll; margin-right:10px">
-      <div class="ratedpersons">
-          Selected Name
-          Rating:
+      <div class="ratedpersons" style="padding:8px">
+           <?php
+                    $rows=$select->getRatedMatchedProfile($email);
+                    if(is_array($rows))
+                    {
+                    foreach($rows as $row)
+                    {
+                        echo '<div style="float:left;border:1px solid #ccc;padding:5px;width:70%;height:50px;margin-bottom:2px">';
+                        $userdet=$select->getUserDetails($row["to_user"]);
+                            foreach ($userdet as $usr)
+                            {
+                                echo '<h4 style="margin:0px">'.$usr["fname"].' '.$usr["lname"].'</h4>';
+                                echo $usr["religion"].',';
+                                echo '<b>'.$usr["country_living_in"].'</b>';
+                            }
+                        echo '</div>';
+                        echo '<div style="width:25%;height:50px;float:left;border:1px solid #ccc;text-align:center;"><h4 style="margin:0px">Rating</h4>'.$row["rating"].'/5</div>';
+                    }
+                  }
+                  else
+                  {
+                      echo '<div style=" text-align:center; padding:5px">';
+                      echo '<h3>Waiting For Your Match</h3>';
+                      echo '</div>';
+                  }
+              ?>
           </div>
        </div>
     </div>
