@@ -147,7 +147,7 @@ class Select extends Model
     public function getUserChat($email)
     {
         $this->query("select * from chats where from_user='$email' or to_user='$email'");
-        if($row=$this->rows())
+        if($rows=$this->rows())
             return $rows;
         else
         {

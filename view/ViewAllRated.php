@@ -1,3 +1,11 @@
+<?php
+    include 'chkSession.php';
+    $email=$_SESSION['email'];
+    require '../model/DbConn.php';
+    require '../model/Select.php';  
+    $select=new Select();
+
+?>
 <!DOCTYPE HTML>
 
 <head>
@@ -56,10 +64,90 @@ include "header.php";
 	  </div>
 	  
 		<a href="myprofile.php">Back to Home</a>
-                <div>
-                    Rated Person
-                    Rating
-               </div>
+                <form action="../controller/RateSelectedController.php" method="post">
+               <?php
+                     $ids=array();
+                     
+                     $rows=$select->getRatedMatchedProfile($email);
+                     if(is_array($rows))
+                     {
+                    foreach($rows as $row)
+                    {
+                        ?>
+                     <div style="border:1px solid #ccc; padding:15px; margin-bottom:3px">
+                        
+                            <?php 
+                                $image=$select->getUserImage($row["to_user"]);
+                                     
+                                if(is_array($image))
+                                {
+                                foreach ($image as $img)                                    
+                                {
+                                    ?>
+                                    <div style="float:left; margin-right: 15px; width:210;">
+                                        
+                                  <?php                                     
+                                    echo '<img src="../controller/usersdata/'.$img["image"].'" width=210 height=180>';                                    
+                                         
+                                    ?>
+                             
+                                    </div>
+                             <?php   }
+                                }
+                                else
+                                {
+                            ?>
+                                    <div style="float:left; margin-right: 15px; width:210;">
+                                        
+                                  <?php
+                                  echo '<img src="" width=210 height=180>';
+                                    ?>
+                             
+                                    </div>
+                        <?php
+                                }?>
+                         <div style="float:left;width: 60%">
+                    <?php
+                    
+                            $userdet=$select->getUserDetails($row["to_user"]);
+                            foreach ($userdet as $usr)
+                            {
+                                echo '<h3 style="margin-bottom:1px">'.$usr["fname"].' '.$usr["lname"].'</h3><br>';
+                                echo $usr["dob"].'<br>';
+                                echo $usr["religion"].'<br>';
+                                echo $usr["country_living_in"].'<br>';
+                            }
+                    ?>
+                    Rating:
+                    <select name="<?php echo $row['id'];?>">
+                        <option value="<?php echo $row['rating']?>"><?php echo $row['rating']?></option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        </select>
+                    </div>                   
+                    <?php
+                    
+                    array_push($ids, $row['id']);
+                    ?>
+                     <div style="clear: both"></div>
+                </div>
+                    <?php
+                    }
+                   
+                    ?>
+                    <input type="hidden" name="ids" value="<?php echo htmlentities(serialize($ids)); ?>">
+                   
+                    <p align="center"><input class="button success" type="submit" value="Submit"></p>
+               </form>
+        <?php
+        }
+        else
+            echo '<h3>Waiting For Your Match</h3>';
+        ?>
         
     </div>
 

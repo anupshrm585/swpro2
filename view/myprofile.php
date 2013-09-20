@@ -252,7 +252,7 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
                   else
                   {
                       echo '<div style=" text-align:center; padding:5px">';
-                      echo '<h3>Waiting For Your Match</h3>';
+                      echo '<h3>You Have not rated anyone</h3>';
                       echo '</div>';
                   }
               ?>
@@ -261,7 +261,7 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
     </div>
       <div class="one-half last">     
     <div class="heading_bg" >
-      <h2 style="color:#32015A">Message From Admin </h2>
+      <h2 style="color:#32015A">Chat With Admin </h2>
     </div>
           <div style="margin-bottom: 0px;padding-left: 6px;">
           <ul id="tabify_menu" class="menu_tab" style="margin: 0px ">
@@ -270,9 +270,28 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
             </div>
           
                
-          <div class="messages" style="height:200px;overflow-y: scroll">         
-              <div class="adminMessage"></div>
-              <div class="userMessage"></div>
+          <div class="messages" style="height:200px;overflow-y: scroll;padding: 5px;">         
+              
+                  <?php
+                        $rows=$select->getUserChat($email);
+                        if(is_array($rows))
+                        {
+                            foreach($rows as $row)
+                             {
+                                if($row["to_user"] == "admin")
+                                {
+                                    echo ' <div style="border:1px solid #ccc;padding:5px;width:95%;margin-bottom:2px"><h4 style="margin:0px">Me: </h4> '.$row["message"].'<br>'.$row["timestamp"].'</div>'; 
+                                }                                
+                                else
+                                {
+                                   echo '<div style="border:1px solid #ccc;padding:5px;width:95%;margin-bottom:2px"><h4 style="margin:0px">Admin:</h4>'.$row["message"].'<br>'.$row["timestamp"].'</div>'; 
+                                }
+                            }
+                        }
+                  
+                  ?>
+              
+              
            </div>
          
     

@@ -1,3 +1,10 @@
+<?php
+include 'chkSession.php';
+$email=$_SESSION['email'];
+    require '../model/DbConn.php';
+    require '../model/Select.php';  
+    $select=new Select();
+?>
 <!DOCTYPE HTML>
 
 <head>
@@ -57,12 +64,26 @@ include "header.php";
 	  
 		<a href="myprofile.php">Back to Home</a>
                 <form action="../controller/MessageController.php" method="post">
-                <div class="messages" style="padding:2px;">
-                    Admin Message
-                    
-                </div>    
-                    <div class="messages">
-                   User Message
+                  
+                    <div class="messages" style="">
+                   <?php
+                        $rows=$select->getUserChat($email);
+                        if(is_array($rows))
+                        {
+                            foreach($rows as $row)
+                             {
+                                if($row["to_user"] == "admin")
+                                {
+                                    echo ' <div style="padding:5px;padding-left:10px;width:95%;margin-bottom:2px"><h4 style="margin:0px">Me: </h4> '.$row["message"].'<br>'.$row["timestamp"].'</div>'; 
+                                }                                
+                                else
+                                {
+                                   echo '<div style="padding:5px;padding-left:10px;width:95%;margin-bottom:2px"><h4 style="margin:0px">Admin:</h4>'.$row["message"].'<br>'.$row["timestamp"].'</div>'; 
+                                }
+                            }
+                        }
+                  
+                  ?>
                     
                 </div>    
                     <p><textarea name="sendmessage" placeholder="Enter message for admin" style="height: 100px; width: 80%;padding:5px; resize: none"></textarea></p>

@@ -1128,20 +1128,7 @@ $("u").show("slow");
 
 <!--<input type="checkbox" name="fldcheckbox" id="fldcheckbox" onclick="fnchecked(this.checked);"/>-->
 
-<tr>
-<td>Choose Your Membership Type:</td><td> <!--<input type="text" value="" name="ans" id="" placeholder="ANSWER" onFocus="nextfield ='done';" />-->
 
-
-<!--<select name="memtype">
-<option value="">select</option>
-<option value="gold">Gold</option>
-<option value="silver">Silver</option>
-<option value="platimun">Platinum</option>
-</select> -->
-
-
-
-</td></tr>
 
 
 <tr>
