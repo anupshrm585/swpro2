@@ -27,8 +27,9 @@ class Select extends Model
     public function checkUserStatus($email)
     {
         $this->query("select * from user_status where email='$email'");
-        if($row=$this->rows())
+        if($this->rows())
         {
+            $row= $this->rows();
             $isPaid=$row['is_paid'];
             $isApproved=$row['is_approved'];
             $hasProBio=$row['has_pro_bio'];
@@ -44,8 +45,10 @@ class Select extends Model
     public function checkUserIsPaid($email)
     {
         $this->query("select is_paid from user_status where email='$email'");
-        if($rows=$this->rows())
+        $rows=$this->rows();
+        if($rows != null)
         {
+            var_dump($rows);
             foreach($rows as $row)
             {                
                 $isPaid=$row['is_paid'];
@@ -62,9 +65,9 @@ class Select extends Model
         public function checkUserIsApproved($email)
     {
         $this->query("select is_approved from user_status where email='$email'");
-        if($rows=$this->rows())
+        if($this->rows())
         {
-            foreach($rows as $row)
+            foreach($this->rows() as $row)
             {
             $isApproved=$row['is_approved'];
             $userStatus=$isApproved;
@@ -80,9 +83,9 @@ class Select extends Model
     public function checkUserHasProBio($email)
     {
         $this->query("select has_pro_bio from user_status where email='$email'");
-        if($rows=$this->rows())
+        if($this->rows())
         {
-            foreach($rows as $row)
+            foreach($this->rows() as $row)
             {
             $hasProBio=$row['has_pro_bio'];
             $userStatus=$hasProBio;
@@ -98,8 +101,8 @@ class Select extends Model
     public function getUserName($email)
     {
         $this->query("select fname,lname from user_details where email='$email'");
-        if($rows=$this->rows())
-            return $rows;
+        if($this->rows())
+            return $this->rows();
         else
         {
             echo mysql_error();
@@ -109,7 +112,8 @@ class Select extends Model
     public function getUserDetails($email)
     {
         $this->query("select * from user_details where email='$email'");
-        if($rows=$this->rows())
+        $rows=$this->rows();
+        if($rows !=null)
             return $rows;
         else
         {
@@ -120,7 +124,8 @@ class Select extends Model
     public function getUnratedMatchedProfile($email)
     {
         $this->query("select * from matched_profile where from_user='$email' and rating=0");
-        if($rows=$this->rows())
+        $rows=$this->rows();
+        if($rows !=null)
             return $rows;
         else
         {
@@ -131,8 +136,8 @@ class Select extends Model
     public function getRatedMatchedProfile($email)
     {
         $this->query("select * from matched_profile where from_user='$email' and rating>0");
-        if($rows=$this->rows())
-            return $rows;
+        if($this->rows())
+            return $this->rows();
         else
         {
             echo mysql_error();
@@ -142,8 +147,8 @@ class Select extends Model
     public function getUserChat($email)
     {
         $this->query("select * from chats where from_user='$email' or to_user='$email'");
-        if($rows=$this->rows())
-            return $rows;
+        if($this->rows())
+            return $this->rows();
         else
         {
             echo mysql_error();
@@ -153,8 +158,9 @@ class Select extends Model
     public function getUserImage($email)
     {
         $this->query("select image from user_bio where email='$email'");
-        if($this->rows())
-            return $this->rows();
+        $rows=$this->rows();
+        if($rows != null)
+            return $rows;
         else
         {
             echo mysql_error();

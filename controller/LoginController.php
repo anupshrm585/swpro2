@@ -1,8 +1,9 @@
 <?php
+
 //echo 'file name:controller/LoginController.php';
 $email=$_POST['email']; //email id
 $pass=$_POST['pass']; // password
-$rememberme=$_POST['rememberme']; //not a permanent variable
+//$rememberme=$_POST['rememberme']; //not a permanent variable
 //var_dump($_POST);
 
 
