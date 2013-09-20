@@ -150,6 +150,7 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
             <div style="width:200px;float:left;padding:20px 10px;"><?php
                 
                 $rows=$select->populateUserDetails($email);
+                
                 foreach ($rows as $row)
                 {
                     echo "<h3 style='margin:2px'>".$row["fname"]." ".$row["lname"]."</h3></br>";

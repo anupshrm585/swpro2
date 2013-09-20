@@ -14,14 +14,14 @@ class Model
 
 	public function query($sql)
 	{
-            //$this->rows=null;
+            $this->rows=null;
 		$this->result = $this->db->query($sql);
                 return $this->result;
 	}
 
 	public function rows()
 	{
-            mysqli_data_seek($this->result, 0);
+           // mysqli_data_seek($this->result, 0);
 		for($x=1;$x <= $this->db->affected_rows; $x++)
 		{
 			$this->rows[] = $this->result->fetch_assoc();
