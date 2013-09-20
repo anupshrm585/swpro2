@@ -1,3 +1,34 @@
+<?php
+    require 'chkSession.php';
+    $filepath="../controller/usersdata/";
+    $filename = "supriyatibrewal@gmail.com1379604472erd2013.pdf";
+
+$file_extension = strtolower(substr(strrchr($filename, "."), 1));
+
+if ($filename == "") {
+echo "<html><title>Download</title><body>No filename given.</body></html>";
+exit();
+} elseif (!file_exists($filepath.$filename)) {
+echo "<html><title>Download</title><body>File not found.</body></html>";
+exit();
+}
+
+switch ($file_extension) {
+case "pdf":
+$contenttype = "application/pdf";
+break;
+case "doc":
+$contenttype = "application/msword";
+case "docx":
+    $contenttype = "application/msword";
+break;
+}
+
+header("Content-Type: " . $contenttype);
+header("Content-Disposition: attachment; filename=\"" . basename($filename) . "\";");
+readfile($filename);
+exit();
+?>
 <!DOCTYPE HTML>
 
 <head>

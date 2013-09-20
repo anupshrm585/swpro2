@@ -124,8 +124,9 @@ class Select extends Model
     public function getUnratedMatchedProfile($email)
     {
         $this->query("select * from matched_profile where from_user='$email' and rating=0");
-        if($this->rows())
-            return $this->rows();
+        $rows=$this->rows();
+        if($rows !=null)
+            return $rows;
         else
         {
             echo mysql_error();

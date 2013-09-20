@@ -191,8 +191,14 @@ JSFX_FloatDiv("divTopLeft", 10,190).floatIt();
             </div>
         
     <div class="messages" style="height:210px;overflow-y: scroll;margin-top:0px " >         
-              <div class="adminMessage"></div>
-              <div class="userMessage"></div>
+              <?php
+                    $rows=$select->getUnratedMatchedProfile($email);
+                    foreach($rows as $row)
+                    {
+                        echo $row["to_user"]."</br>";
+                    }
+              
+              ?>
            </div>
     <div style="clear:both"></div>
          </div>
